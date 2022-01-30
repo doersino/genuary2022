@@ -1,0 +1,19 @@
+#GENUARY2022 №13 – "80x800."
+
+80 by 800 pixels is easy.
+
+So how about 80 by 800 millimeters, using a tiny lil' plotter with a drawing area of only 100 by 160 millimeters? Tricky, but fun to figure out!
+
+#plottertwitter #generativeart #creativecoding #genuary
+
+
+How I've plotted this one:
+
+1. Divided the image into 150-millimeter segments,
+2. added instructions to draw registration marks outside the image area on either end, then
+3. during plotting, aligned the previous segment's left registration mark with the pen tip.
+
+#plottertwitter
+
+
+Form factor aside, this drawing is an exploration of the parameter space underlying squircles, everyone's favorite app icon shape slash roundrect alternative. To implement it, I yoinked some math from this excellent post by @ndesmic: https://dev.to/ndesmic/how-to-draw-squircles-and-superellipses-3d14

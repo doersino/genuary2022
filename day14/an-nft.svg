@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120.00001mm"
+   height="100mm"
+   viewBox="0 0 120.00001 100"
+   version="1.1"
+   id="svg1474"
+   sodipodi:docname="an-nft.svg"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1476"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.3041828"
+     inkscape:cx="254.56553"
+     inkscape:cy="195.52473"
+     inkscape:window-width="1789"
+     inkscape:window-height="1384"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs1471" />
+  <g
+     inkscape:label="1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <rect
+       style="fill:none;fill-opacity:0.955466;stroke:#000000;stroke-width:0.499999"
+       id="rect1557"
+       width="119.50001"
+       height="99.5"
+       x="0.24999954"
+       y="0.24999949" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="2"
+     style="display:inline">
+    <g
+       transform="translate(45.19925,50.45161)"
+       id="g2409"
+       style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round">
+      <path
+         d="M 5.2493219,-2.0002437 4.9212396,-2.6669916 4.2544917,-3.0056572 H 3.5877438 L 2.9209959,-2.6669916 2.5876219,-2.328326 2.254248,-1.6721614 v 0.6720396 L 2.5876219,-0.33337395 3.2596615,0 H 3.9158261 L 4.5931573,-0.33337395 4.9212396,-1.0001218 M 3.5877438,-3.0056572 2.9209959,-2.328326 2.5876219,-1.6721614 v 1.0054135 L 3.2596615,0 m 2.328326,-3.0056572 -0.6667479,2.0055354 v 0.66674785 L 5.5879875,0 6.2547354,-0.33337395 6.5828177,-0.6667479 7.2601489,-1.6721614 M 5.9266531,-3.0056572 5.2493219,-1.0001218 v 0.66674785 L 5.5879875,0"
+         style="stroke-width:0.00273472in"
+         id="path2399" />
+      <path
+         d="m 7.254854,-1.6721614 0.6667479,-0.9948302 0.6720396,-0.3386656 0.6561646,0.3386656 v 0.6667479 L 8.5936415,0 m 0,-3.0056572 0.3280823,0.3386656 v 0.6667479 L 8.2549759,0 m 0.9948302,-2.0002437 0.6773312,-0.6667479 0.6561647,-0.3386656 h 0.338666 l 0.666748,0.3386656 v 0.6667479 l -0.328082,1.0001219 v 0.66674785 L 11.588716,0 m -0.666748,-3.0056572 0.338666,0.3386656 v 0.6667479 l -0.338666,1.0001219 v 0.66674785 L 11.588716,0 l 0.666748,-0.33337395 0.338665,-0.33337395 0.656165,-1.0054135"
+         style="stroke-width:0.00273472in"
+         id="path2401" />
+      <path
+         d="m 31.5,158 63,94 63.5,32 62,-32 V 189 L 158,0 m 0,284 31,-32 V 189 L 126,0 m 94,189 64,63 62,32 h 32 l 63,-32 V 189 L 410,94.5 v -63 L 441,0 m -63,284 32,-32 V 189 L 378,94.5 v -63 L 441,0 l 63,31.5 32,31.5 62,95"
+         style="stroke-width:0.2584in"
+         transform="matrix(0.0105833,0,0,-0.0105833,15.3352,0)"
+         id="path2403" />
+      <path
+         d="m 126,284 94,94 64,94 31,95 v 63 l -31,32 -64,-32 -31,-63 -283.5,-851 v -62 l 31.5,-32 63,32 31.5,94 L 63,31.5 94.5,0 H 158 l 62,31.5 32,31.5 63,95 M 189,567 158,410 126,284 31.5,0 l -63,-158 -63,-126"
+         style="stroke-width:0.2584in"
+         transform="matrix(0.0105833,0,0,-0.0105833,21.3359,0)"
+         id="path2405" />
+      <path
+         d="m 31.5,158 63,94 63.5,126 M 252,662 63,94.5 v -63 L 126,0 189,31.5 220,63 284,158 M 284,662 94.5,94.5 v -63 L 126,0 M 94.5,410 H 284"
+         style="stroke-width:0.2584in"
+         transform="matrix(0.0105833,0,0,-0.0105833,24.3416,0)"
+         id="path2407" />
+    </g>
+  </g>
+  <plotdata
+     layer="-2"
+     node="0"
+     last_path="0"
+     node_after_path="0"
+     last_known_x="0"
+     last_known_y="0"
+     paused_x="0"
+     paused_y="0"
+     randseed="0"
+     row="0"
+     id="1641150867"
+     application="axidraw" />
+</svg>

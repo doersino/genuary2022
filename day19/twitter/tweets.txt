@@ -1,0 +1,17 @@
+#GENUARY2022 №19 – "Use text/typography."
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
+
+#plottertwitter #generativeart #creativecoding #genuary
+
+
+Here, the final result wasn't as notable as the pleasingly hacky implementation – it doesn't, in fact, contain instructions to draw the letter "A" – which I'm planning to reuse for day 21:
+
+1. Loading an SVG font (https://github.com/isdat-type/Relief-SingleLine/raw/main/fonts/open_svg/ReliefSingleLine-Regular.svg, in this case) via ol' XMLHttpRequest,...
+
+
+2. ...based on a list of letters, looking up the associated path data,
+3. then placing <path>s containing these looked-up letter shapes randomly on a grid, and
+4. finally applying some transformations to scale and rotate the letters and "assign" them to different pens.
+
+Video:

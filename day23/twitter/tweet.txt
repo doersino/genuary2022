@@ -1,0 +1,5 @@
+#GENUARY2022 №23 – "Abstract vegetation."
+
+Went for the obvious approach: L-systems! To generate these shrubs, I've used @kelleyvanevert's excellent implementation available on @observablehq (it exports tidy SVGs): https://observablehq.com/@kelleyvanevert/l-systems-2
+
+#plottertwitter #generativeart #genuary

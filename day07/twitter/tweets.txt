@@ -1,0 +1,13 @@
+#GENUARY2022 №07 - "Sol LeWitt Wall Drawing."
+
+Started out intending to draw a reproduction of Wall Drawing #462, but things took a bunch of turns during the coding stage until this popped out. Bit rough around the edges, but I like it.
+
+#plottertwitter #generativeart #genuary
+
+
+...and more by accident than through intent, I got the distance between adjacent lines just right for the tiniest gaps to form, which I find delightful! (0.3 mm for Staedtler Triplus fineliners.)
+
+#plottertwitter #generativeart #creativecoding #genuary #genuarly2022
+
+
+(Also, this piece isnt really generative in the usual sense – my program will emit the same drawing each time. Still, it was enjoyable to figure out the math behind it: everything's just circles clipped to the desired regions using position-dependent predicates.)

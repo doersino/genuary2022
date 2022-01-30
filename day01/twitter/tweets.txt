@@ -1,0 +1,10 @@
+Having recently acquired a pen plotter, I'll be putting it (and whatever creativity I can muster) to work during #GENUARY2022, a month-long generative art challenge with daily prompts: http://genuary.art/prompts
+
+↓ Follow this thread for daily drawings.
+
+
+#GENUARY2022 №01 – "Draw 10,000 of something."
+
+Let's start off with a bit of math: The segments of this jagged line correspond to the first 10,000 natural numbers, with primes drawn in red.
+
+#plottertwitter #generativeart #creativecoding #genuary

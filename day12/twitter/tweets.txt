@@ -1,0 +1,17 @@
+#GENUARY2022 №12 – "Packing (squares, circles, any shape...)."
+
+A tightly-packed group of Susuwatari! Certainly not be the tightest possible packing, but even Studio Ghibli's soot sprites need some room to breathe.
+
+#plottertwitter #generativeart #creativecoding #genuary #ghibli
+
+
+While I enjoyed writing the generator (I think I'll publish all my #genuary2022 code at the end of the month), plotting this one was a chore – total drawing time was more than an hour (for a 10×10 cm area, though I could've probably increased the speed), the... (1/3)
+TODO video 1: filling in the "outlined" circles
+
+
+...pen-lifting servo decided to die on me (and then resurrected itself), registration didnt quite work out (the white pen used for the eyes is much thicker than the black one), and the pupils required redrawing. I suppose there's a reason folks use printers nowadays. (2/3)
+TODO video 2: eyes
+
+
+Funnily enough, out of all the black pens I own, a novelty Totoro pen my girlfriend got me as a souvenir from Korea a few year ago turned out to be the only one "compatible" with the white gel pen – other blacks would mix with it. (3/3)
+TODO photo of test sheet with totoro pen

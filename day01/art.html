@@ -1,0 +1,108 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: gray;
+        text-align: center;
+    }
+    svg {
+        background-color: white;
+    }
+</style>
+<svg></svg>
+<!-- TODO
+* download button => svg & code like uji prototype
+-->
+<script>
+    const paper = "black";
+    let pen = "white";  // can be changed later
+
+    // in mm
+    const stroke = 0.4;
+    const w = 125;
+    const h = 80;
+
+    // adjustment knob
+    const scale = 1.13;
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    // really bad but interesting: shape depends on multiplier, seed picks a "starting node"
+    let seed = 1;
+    const rand = (n) => 98717 * Math.abs(Math.sin(seed++ * 103291 + n * seed * 20389)) % 1;
+
+    const svg = document.querySelector("svg");
+    svg.style.backgroundColor = paper;
+    svg.style.strokeWidth = stroke;
+    svg.style.fill = "none";
+    svg.style.width = `${w * scale}mm`;
+    svg.style.height = `${h * scale}mm`;
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+    let path = [];
+
+    const draw = (continueFromSameSpot) => {
+        const ePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        ePath.setAttribute("d", path.map(c => c.join(" ")).join(" "));
+        ePath.style.stroke = pen;
+        svg.appendChild(ePath);
+        if (continueFromSameSpot) {
+            path = [["M", path[path.length - 1][1], path[path.length - 1][2]]];
+        } else {
+            path = [];
+        }
+    };
+
+    const m = (x, y) => path.push(["M", x, y]);
+    const l = (x, y) => path.push(["L", x, y]);
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    const prime = n => {
+        for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
+            if (n % i === 0) {
+                return false;
+            }
+        }
+        return n > 1;
+    }
+
+    m(1, h * 0.97);
+    n = 1;
+    for (let x = 0; x < w; x++) {
+        for (let y = 0; y < h; y++) {
+
+            if (prime(n)) {
+                draw(true);
+                pen = "red";
+                console.log(n);
+            } else {
+                pen = "white";
+            }
+
+            const p = [x, y];
+            if (x % 2 == 0) {
+                p[1] = h - p[1];
+            }
+            if (y % 2 != 0) {
+                p[0] += 1;
+            }
+            l(1 + p[0] * 0.99, 1 + p[1] * 0.97);
+
+            if (prime(n)) {
+                draw(true);
+            }
+
+            n++;
+        }
+    }
+    draw();
+
+    /*pen = "red";
+    m(15, 15);
+    l(25, 35);
+    draw();*/
+
+</script>

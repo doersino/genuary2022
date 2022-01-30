@@ -1,0 +1,5 @@
+#GENUARY2022 №05 – "Destroy a square."
+
+Didn't have enough time to implement any cool ideas today, so here's just a grid of progressively-more-torn-apart squares.
+
+#plottertwitter #generativeart #creativecoding #genuary

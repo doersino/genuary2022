@@ -1,0 +1,14 @@
+{
+  "name": "@kelleyvanevert/l-systems-2",
+  "main": "c0fccd63844028e1@1175.js",
+  "version": "1175.0.0",
+  "homepage": "https://observablehq.com/@kelleyvanevert/l-systems-2",
+  "author": {
+    "name": "Kelley van Evert",
+    "url": "https://observablehq.com/@kelleyvanevert"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

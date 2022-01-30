@@ -1,0 +1,12 @@
+#GENUARY2022 №04 – "The next next Fidenza."
+
+I might be slightly biased, but UJI's a pretty neat algorithm/tool: https://doersino.github.io/uji/
+
+This is a "typical" UJI drawing, but you can do all kinds of stuff with it: https://twitter.com/doersino/status/1443966696293912577
+
+#plottertwitter #generativeart #genuary
+
+
+(Yes, the pen died a bit toward the middle there, but that ended up fitting the piece rather well.)
+
+The UJI share link for this drawing is https://doersino.github.io/uji/#s3r2200ro-0.4e0.988ex0.988t1.5se300i140w1600h1000tra-1.8wa100wav50wavi0.3wavin2j4sa30saw110exp8expa8rotatio-0.02 - take a look, play with the parameters, and maybe use it for your own art!

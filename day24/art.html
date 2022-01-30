@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ART</title>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: gray;
+        text-align: center;
+    }
+    svg {
+        background-color: white;
+    }
+    button {
+        position: fixed;
+        font-size: 32px;
+        width: 48px;
+        height: 48px;
+        right: 12px;
+        top: 12px;
+        background-color: #ffffff88;
+        border: 2px solid white;
+        border-radius: 99em;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #fff;
+    }
+    span {
+        position: fixed;
+        bottom: 12px;
+        right: 12px;
+        font-size: 12px;
+        font-family: sans-serif;
+        color: #333;
+    }
+</style>
+<svg></svg>
+<span></span>
+<button onclick="download();">↓</button>
+<script>
+    const paper = "white";
+    let pen = "black";  // can be changed later
+
+    // in mm
+    let stroke = 0.3;
+    const w = 160;
+    const h = 100;
+
+    // adjustment knob
+    const scale = 1.13;
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    const start = new Date();
+
+    // really bad but interesting: shape depends on multiplier, seed picks a "starting node"
+    let seed = 12345678910000;
+    let originalSeed = seed;
+    const rand = (n) => 98717 * Math.abs(Math.sin(seed++ * 103291 + n * seed * 20389)) % 1;
+
+    // based on https://stackoverflow.com/a/16245768
+    function htmlToObjectURL(html) {
+        const sliceSize = 512;
+        const byteArrays = [];
+
+        for (let offset = 0; offset < html.length; offset += sliceSize) {
+            const slice = html.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, {type: 'text/html'});
+        const url = URL.createObjectURL(blob)
+        return url;
+    }
+
+    function downloadFile(hrefData, filename) {
+        let a = document.createElement("a");
+        a.href = hrefData;
+        a.setAttribute("download", filename);
+        document.body.appendChild(a);
+        a.click();
+        a.outerHTML = "";
+    }
+
+    function download() {
+        let filename = "art_seed" + originalSeed + "_" + new Date().toISOString().replace(/\:/g, ".");
+        downloadFile(htmlToObjectURL(svg.outerHTML), filename + ".svg");
+    }
+
+    const svg = document.querySelector("svg");
+    svg.style.strokeWidth = stroke;
+    svg.style.fill = "none";
+    svg.setAttribute("width", `${w+0.001}mm`);
+    svg.setAttribute("height", `${h+0.001}mm`);
+    svg.style.width = `${(w+0.001) * scale}mm`;
+    svg.style.height = `${(h+0.001) * scale}mm`;
+    svg.setAttribute("viewBox", `0 0 ${w+0.001} ${h+0.001}`);
+    svg.setAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");  // otherwise preview won't work
+
+    // layer "% Background" to make sure AxiDraw Inkscape extension doesn't try to draw it
+    svg.innerHTML = `<g inkscape:groupmode="layer" inkscape:label="% Background"><rect width="100%" height="100%" fill="${paper}"/></g>`;
+
+    let drawing = [];
+
+    let layerNum = 1;
+    let path = [];
+
+    const draw = (continueFromSameSpot) => {
+        // layer.pen, layer.num, layer.paths
+
+        // append to exisiting color layer if exists, create a new one otherwise
+        // note: layers are an inkscape thing, helps with color separation when
+        //       plotting using the inkscape axidraw extension
+        let layer = drawing.find(layer => layer.pen == pen);
+        if (layer != null) {
+            layer.paths.push(path);
+        } else {
+            layer = {
+                pen: pen,
+                num: layerNum,
+                paths: [path]
+            };
+            layerNum++;
+
+            drawing.push(layer);
+        }
+
+        if (continueFromSameSpot) {
+            path = [["M", path[path.length - 1][1], path[path.length - 1][2]]];
+        } else {
+            path = [];
+        }
+    };
+
+    const m = (x, y) => {
+
+        // avoid adding superflous moves
+        if (path.length > 0 && path[path.length - 1][0] == "M") {
+            path[path.length - 1] = ["M", x, y];
+        } else {
+            path.push(["M", x, y])
+        }
+    };
+
+    const l = (x, y) => path.push(["L", x, y]);
+
+    const scaleToFit = (marginTopBottom = 0, marginLeftRight = 0) => {
+
+        // compute aabb, initial values "inverted" against the expected
+        let xMin = Number.MAX_VALUE;
+        let xMax = Number.MIN_VALUE;
+        let yMin = Number.MAX_VALUE;
+        let yMax = Number.MIN_VALUE;
+        drawing.forEach(layer => {
+            layer.paths.forEach(path => {
+                path.forEach(command => {
+                    if (command[1] < xMin) {
+                        xMin = command[1];
+                    } else if (command[1] > xMax) {
+                        xMax = command[1];
+                    }
+
+                    if (command[2] < yMin) {
+                        yMin = command[2];
+                    } else if (command[2] > yMax) {
+                        yMax = command[2];
+                    }
+                });
+            });
+        });
+
+        // add margins
+        xMin -= marginLeftRight;
+        xMax += marginLeftRight;
+        yMin -= marginTopBottom;
+        yMax += marginTopBottom;
+
+        // determine which provides tighter constraint, thus determine offsets and scaling factor
+        const xDiff = xMax - xMin;
+        const yDiff = yMax - yMin;
+
+        // fraction of drawing area covered in each dimension
+        const xFac = xDiff / w;
+        const yFac = yDiff / h;
+
+        let scale = 0;
+        if (xFac > yFac) {
+            scale = 1 / xFac;
+        } else {
+            scale = 1 / yFac;
+        }
+
+        // one of these will be 0
+        const xOffset = (w - xDiff * scale) / 2;
+        const yOffset = (h - yDiff * scale) / 2;
+
+        // scaling
+        drawing.forEach(layer => {
+            layer.paths = layer.paths.map(path => {
+                return path.map(command => {
+                    const x = xOffset + (command[1] - xMin) * scale;
+                    const y = yOffset + (command[2] - yMin) * scale;
+
+                    return [command[0], x, y];
+                });
+            });
+        });
+    };
+
+    const render = () => {
+        drawing.forEach(layer => {
+            eLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            eLayer.setAttribute("class", layer.pen);
+            eLayer.setAttribute("inkscape:groupmode", "layer");
+            eLayer.setAttribute("inkscape:label", `${layer.num} ${layer.pen}`);
+            eLayer.setAttribute("inkscape:groupmode", `layer`);
+            eLayer.setAttribute("id", `layer${layer.num}`);
+
+            layer.paths.forEach(path => {
+                const ePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                ePath.setAttribute("d", path.map(c => c.join(" ")).join(" "));
+                ePath.setAttribute("stroke-linecap", "round");   // mimics pen
+                ePath.setAttribute("stroke-linejoin", "round");  // ditto
+                ePath.style.stroke = layer.pen;
+                eLayer.appendChild(ePath);
+            });
+
+            svg.appendChild(eLayer);
+        });
+
+        const end = new Date();
+        document.querySelector("span").innerText = `${end - start}ms`;
+    };
+
+    // out-of-place rotation of p = [x₁,y₁] around o = [x₂,y₂], based on
+    // http://stackoverflow.com/a/2259502
+    const rotate = (o, p, angle) => {
+        var s = Math.sin(angle);
+        var c = Math.cos(angle);
+
+        // copy point
+        p = [p[0],p[1]];
+
+        // translate point back to origin
+        p[0] -= o[0];
+        p[1] -= o[1];
+
+        // rotate point
+        var xnew = p[0] * c - p[1] * s;
+        var ynew = p[0] * s + p[1] * c;
+
+        // translate point back:
+        p[0] = xnew + o[0];
+        p[1] = ynew + o[1];
+
+        return p;
+    };
+
+    const spiral = (center, r) => {
+        const segmentsPerRotation = 100;
+        const offsetPerSegment = stroke / segmentsPerRotation / 2;
+
+        // fill central point
+        m(center[0]-Math.min(r/2, 0.3), center[1]);
+        l(center[0]+Math.min(r/2, 0.2), center[1]);
+
+        m(center[0], center[1]);
+        let currentAngle = 0;
+        let currentRadius = 0;
+        while (currentRadius < r) {
+            let x = Math.cos(currentAngle) * currentRadius;
+            let y = Math.sin(currentAngle) * currentRadius;
+
+            l(center[0] + x, center[1] + y);
+
+            currentAngle += 2 * Math.PI / segmentsPerRotation;
+            currentRadius += offsetPerSegment;
+        }
+
+        // finish one more turn as circle
+        for (let i = 0; i < segmentsPerRotation; i++) {
+            let x = Math.cos(currentAngle) * currentRadius;
+            let y = Math.sin(currentAngle) * currentRadius;
+
+            l(center[0] + x, center[1] + y);
+
+            currentAngle += 2 * Math.PI / segmentsPerRotation;
+        }
+    };
+
+    // two passes because gel pens often take a second to begin drawing (and
+    // might not be fully opaque with a single pass)
+    const spiral2 = (center, r) => {
+        spiral(center, r);
+        spiral(center, r);
+    };
+
+    const circle = (center, r) => {
+        const segments = 100;
+
+        m(center[0] + r, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    };
+
+    const arc = (center, r, start, stop, continuePrevious, inBounds) => {
+        const segments = 720;
+
+        if (inBounds == undefined) {
+            inBounds = () => true;
+        }
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = start + 2 * Math.PI * (i / segments);
+            let stop2 = stop;
+            while (angle > 2 * Math.PI) {
+                angle -= 2 * Math.PI;
+                stop2 -= 2 * Math.PI;
+            }
+
+            let x = center[0] + Math.cos(angle) * r;
+            let y = center[1] + Math.sin(angle) * r;
+
+            if ((!continuePrevious && i == 0) || !inBounds(x, y)) {
+                m(x, y);
+            } else {
+                l(x, y);
+            }
+
+            if (angle >= stop2) {
+                break;
+            }
+        }
+    };
+
+    // TODO do something with this, vary factor in Math.cos(angle * 3)
+    /*const ellipse = (center, rMin, rMax) => {
+        const segments = 100;
+
+        m(center[0] + rMax, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+            let r = rMin + (rMax - rMin) * (0.5 + Math.cos(angle * 3) / 2);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    };*/
+
+    const fakeEllipse = (center, rMin, rMax, segments=100) => {
+        m(center[0] + rMax, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+            let r = rMin + (rMax - rMin) * (0.5 + Math.cos(angle * 2) / 2);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    };
+
+    const eucl = (p1, p2) => {
+        return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    pen = "black";
+
+    let seedo = 0;
+    const rando = () => Math.cos(1-Math.sin(seedo++ | seedo++ | seedo++ | seedo++ | seedo++ | seedo++ | seedo++ | seedo++));// - Math.sqrt(seedo/1000000) / Math.tan(seedo);
+
+    //for (let i = 0; i < 360; i++) {
+    pen = "skyblue";
+    for (let i = 0; i < 240; i ++) {
+        if (i % 3 == 0) pen = "skyblue";
+        if (i % 3 == 1) pen = "blue";
+        if (i % 3 == 2) pen = "darkblue";
+        m(rando()*w,rando()*h);
+        l(rando()*w,rando()*h);
+        draw();
+    }
+
+    draw();
+
+    //scaleToFit();
+    render();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+#GENUARY2022 №28 – "Self portrait."
+
+Playing with Drawing Bot V3 (https://github.com/SonarSonic/DrawingBotV3) to convert photos into paths - here's yours truly as a spiral-dithered one-and-a-half-year-old.
+
+#plottertwitter #generativeart #genuary
+
+
+Setting the plotter to draw at a constant speed was crucial here - this timelapse shows a previous version where I neglected to do that, resulting in missing detail in denser areas.
+
+#plottertwitter #generativeart #genuary #genuary2022

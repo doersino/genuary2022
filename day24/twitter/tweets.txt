@@ -1,0 +1,19 @@
+#GENUARY2022 №24 – "Create your own pseudo-random number generator and visually check the results."
+
+These may not look very random, but they're derived through modification of the sine-based RNG I've been using all #genuary. Pseudocode and timelapse in a reply. #plottertwitter
+
+
+w, h ← width/height of drawing area
+s ← 0
+r:_ → cos(1-sin(s++|s++|s++|s++|s++|s++|s++|s++))
+
+# blue variant
+for i ← 0..240:
+    pen ← [light, medium, dark][i%3]
+    move(r()*w, r()*h)
+    line(r()*w, r()*h)
+
+# gray variant
+move(r()*w, r()*h)
+180 times:
+    line(r()*w, r()*h)

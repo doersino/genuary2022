@@ -1,0 +1,10 @@
+#GENUARY2022 №02 – "Dithering."
+
+Decided to dither radial gradients – so I implemented a spiral drawing routine, drew two spirals (one fading in towards the edges, the other fading out), and tried a few different pens!
+
+#plottertwitter #generativeart #creativecoding #genuary
+
+
+...also, here's a progress timelapse.
+
+#plottertwitter #generativeart #creativecoding #genuary #genuary2022

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ART</title>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        background-color: gray;
+        text-align: center;
+    }
+    svg {
+        background-color: white;
+    }
+    button {
+        position: fixed;
+        font-size: 32px;
+        width: 48px;
+        height: 48px;
+        right: 12px;
+        top: 12px;
+        background-color: #ffffff88;
+        border: 2px solid white;
+        border-radius: 99em;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #fff;
+    }
+</style>
+<svg></svg>
+<button onclick="download();">↓</button>
+<script>
+    const paper = "white";
+    let pen = "black";  // can be changed later
+
+    // in mm
+    let stroke = 0.2;
+    const w = 100;
+    const h = 100;
+
+    // adjustment knob
+    const scale = 1.13;
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    // really bad but interesting: shape depends on multiplier, seed picks a "starting node"
+    let seed = 348588;
+    let originalSeed = seed;
+    const rand = (n) => 98717 * Math.abs(Math.sin(seed++ * 103291 + n * seed * 20389)) % 1;
+
+    // based on https://stackoverflow.com/a/16245768
+    function htmlToObjectURL(html) {
+        const sliceSize = 512;
+        const byteArrays = [];
+
+        for (let offset = 0; offset < html.length; offset += sliceSize) {
+            const slice = html.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, {type: 'text/html'});
+        const url = URL.createObjectURL(blob)
+        return url;
+    }
+
+    function downloadFile(hrefData, filename) {
+        let a = document.createElement("a");
+        a.href = hrefData;
+        a.setAttribute("download", filename);
+        document.body.appendChild(a);
+        a.click();
+        a.outerHTML = "";
+    }
+
+    function download() {
+        let filename = "art_seed" + originalSeed + "_" + new Date().toISOString().replace(/\:/g, ".");
+        downloadFile(htmlToObjectURL(svg.outerHTML), filename + ".svg");
+    }
+
+    const svg = document.querySelector("svg");
+    svg.style.strokeWidth = stroke;
+    svg.style.fill = "none";
+    svg.setAttribute("width", `${w}mm`);
+    svg.setAttribute("height", `${h}mm`);
+    svg.style.width = `${w * scale}mm`;
+    svg.style.height = `${h * scale}mm`;
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
+    svg.innerHTML = `<rect width="100%" height="100%" fill="${paper}"/>`
+
+    let path = [];
+
+    let layerNum = 1;
+
+    const draw = (continueFromSameSpot) => {
+        const ePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        ePath.setAttribute("d", path.map(c => c.join(" ")).join(" "));
+        ePath.style.stroke = pen;
+
+        // append to exisiting color layer if exists, create a new one otherwise
+        // note: layers are an inkscape thing, helps with color separation when
+        //       plotting using the inkscape axidraw extension
+        let layer = svg.querySelector(`g.${pen}`);
+        if (layer != null) {
+            layer.appendChild(ePath);
+        } else {
+            layer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            layer.setAttribute("class", pen);
+            layer.setAttribute("inkscape:groupmode", "layer");
+            layer.setAttribute("inkscape:label", `${layerNum} ${pen}`);
+            layer.setAttribute("inkscape:groupmode", `layer`);
+            layer.setAttribute("id", `layer${layerNum}`);
+            layerNum++;
+
+            layer.appendChild(ePath);
+            svg.appendChild(layer);
+        }
+
+        if (continueFromSameSpot) {
+            path = [["M", path[path.length - 1][1], path[path.length - 1][2]]];
+        } else {
+            path = [];
+        }
+    };
+
+    const m = (x, y) => {
+        if (path.length > 0 && path[path.length - 1][0] == "M") {
+            path[path.length - 1] = ["M", x, y];
+        } else {
+            path.push(["M", x, y])
+        }
+    };
+    const l = (x, y) => path.push(["L", x, y]);
+
+    // out-of-place rotation of p = [x₁,y₁] around o = [x₂,y₂], based on
+    // http://stackoverflow.com/a/2259502
+    const rotate = (o, p, angle) => {
+        var s = Math.sin(angle);
+        var c = Math.cos(angle);
+
+        // copy point
+        p = [p[0],p[1]];
+
+        // translate point back to origin
+        p[0] -= o[0];
+        p[1] -= o[1];
+
+        // rotate point
+        var xnew = p[0] * c - p[1] * s;
+        var ynew = p[0] * s + p[1] * c;
+
+        // translate point back:
+        p[0] = xnew + o[0];
+        p[1] = ynew + o[1];
+
+        return p;
+    };
+
+    const spiral = (center, r) => {
+        const segmentsPerRotation = 100;
+        const offsetPerSegment = stroke / segmentsPerRotation;
+
+        // fill central point
+        m(center[0]-Math.min(r/2, 0.3), center[1]);
+        l(center[0]+Math.min(r/2, 0.2), center[1]);
+
+        m(center[0], center[1]);
+        let currentAngle = 0;
+        let currentRadius = 0;
+        while (currentRadius < r) {
+            let x = Math.cos(currentAngle) * currentRadius;
+            let y = Math.sin(currentAngle) * currentRadius;
+
+            l(center[0] + x, center[1] + y);
+
+            currentAngle += 2 * Math.PI / segmentsPerRotation;
+            currentRadius += offsetPerSegment;
+        }
+
+        // finish one more turn as circle
+        for (let i = 0; i < segmentsPerRotation; i++) {
+            let x = Math.cos(currentAngle) * currentRadius;
+            let y = Math.sin(currentAngle) * currentRadius;
+
+            l(center[0] + x, center[1] + y);
+
+            currentAngle += 2 * Math.PI / segmentsPerRotation;
+        }
+    };
+
+    // two passes because gel pens often take a second to begin drawing (and
+    // might not be fully opaque with a single pass)
+    const spiral2 = (center, r) => {
+        spiral(center, r);
+        spiral(center, r);
+    }
+
+    const circle = (center, r) => {
+        const segments = 100;
+
+        m(center[0] + r, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    }
+
+    const arc = (center, r, start, stop, continuePrevious, inBounds) => {
+        const segments = 720;
+
+        if (inBounds == undefined) {
+            inBounds = () => true;
+        }
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = start + 2 * Math.PI * (i / segments);
+            while (angle > 2 * Math.PI) {
+                angle -= 2 * Math.PI;
+            }
+
+            let x = center[0] + Math.cos(angle) * r;
+            let y = center[1] + Math.sin(angle) * r;
+
+            if ((!continuePrevious && i == 0) || !inBounds(x, y)) {
+                m(x, y);
+            } else {
+                l(x, y);
+            }
+
+            if (angle >= stop) {
+                break;
+            }
+        }
+    }
+
+    // TODO do something with this, vary factor in Math.cos(angle * 3)
+    /*const ellipse = (center, rMin, rMax) => {
+        const segments = 100;
+
+        m(center[0] + rMax, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+            let r = rMin + (rMax - rMin) * (0.5 + Math.cos(angle * 3) / 2);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    };*/
+
+    const fakeEllipse = (center, rMin, rMax) => {
+        const segments = 100;
+
+        m(center[0] + rMax, center[1]);
+
+        for (let i = 0; i < segments + 1; i++) {
+            let angle = 2 * Math.PI * (i / segments);
+            let r = rMin + (rMax - rMin) * (0.5 + Math.cos(angle * 2) / 2);
+
+            let x = Math.cos(angle) * r;
+            let y = Math.sin(angle) * r;
+
+            l(center[0] + x, center[1] + y);
+        }
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    pen = "black";
+
+    let minSize = h/25;
+    let maxSize = h/10;
+
+    let susu = [];
+    let tries = 1000000;
+    while (tries-- > 0) {
+        let x = rand(tries) * w;
+        let y = rand(tries) * h;
+
+        let r = minSize + rand(tries) * (maxSize - minSize);
+
+        let s = {x: x, y: y, r: r};
+
+        let accept = true;
+        susu.forEach(t => {
+            let total = s.r + t.r;
+            let distance = Math.sqrt((s.x - t.x) ** 2 + (s.y - t.y) ** 2);
+
+            if (distance < total) {
+                accept = false;
+            }
+        });
+
+        if (accept) {
+            susu.push(s);
+        }
+    }
+
+    let hairScatterRadial = 0.1;
+    let hairScatterLength = 0.2;
+
+    susu.forEach(s => {
+
+        // body
+        pen = "gray";
+        let hairLength = 0.25 + rand(s.x) * 0.2;
+        //let previousStroke = stroke;
+        //stroke = 0.4;
+        spiral([s.x, s.y], (1 - hairLength) * s.r);
+        //stroke = previousStroke;
+        draw();
+
+        // hairs
+        pen = "black";
+        let hairs = s.r/10 * (15/stroke + rand(s.y) * (10/stroke));
+        for (let i = 0; i < hairs; i++) {
+            let angle = i / hairs * 2 * Math.PI;
+
+            let scatterStart = (rand(i) - 0.5) * hairScatterRadial;
+            let x1 = s.x + Math.cos(angle + scatterStart) * (1 - hairLength) * 0.98 * s.r;
+            let y1 = s.y + Math.sin(angle + scatterStart) * (1 - hairLength) * 0.98 * s.r;
+
+            let scatterEnd = (rand(i) - 0.5) * hairScatterRadial;
+            let scatterLength = s.r * (rand(i) - 0.5) * hairScatterLength;
+            let x2 = s.x + Math.cos(angle + scatterEnd) * (s.r + scatterLength);
+            let y2 = s.y + Math.sin(angle + scatterEnd) * (s.r + scatterLength);
+
+            // note: flipped as to not leave a dot at the far/outside end of the
+            // hair as the pen is raised
+            m(x2, y2);
+            l(x1, y1);
+        }
+        draw();
+
+        // eyes
+        pen = "white";
+        let angle = (rand(s.r) - 0.5) * 2 * Math.PI / 6;
+        let leftEye = rotate([s.x, s.y], [s.x - s.r / 4, s.y - s.r / 8], angle);
+        let rightEye = rotate([s.x, s.y], [s.x + s.r / 4, s.y - s.r / 8], angle);
+        let leftEyeRadius = (s.r * (0.95 + rand(s.r) * 0.1)) / 6;
+        let rightEyeRadius = (s.r * (0.95 + rand(s.r) * 0.1)) / 6;
+        spiral(leftEye, leftEyeRadius);
+        spiral(rightEye, rightEyeRadius);
+        draw();
+
+        // pupils
+        pen = "green";
+        let pupilOffset = 0.2 + rand(s.r) * 0.8;
+        let leftPupil = [leftEye[0] + (pupilOffset * leftEyeRadius / 3), leftEye[1]];
+        let rightPupil = [rightEye[0] - (pupilOffset * leftEyeRadius / 3), rightEye[1]];
+        let leftPupilRadius = (leftEyeRadius * (0.9 + rand(s.r) * 0.2)) / 6;
+        let rightPupilRadius = (rightEyeRadius * (0.9 + rand(s.r) * 0.2)) / 6;
+        spiral(leftPupil, leftPupilRadius);
+        spiral(rightPupil, rightPupilRadius);
+        draw();
+    });
+
+
+    /*const r = w/4;
+    const teeth = 100;
+
+    circle([w/2, h/2], r/10);
+    for (let i = 0; i < teeth; i++) {
+        angle = 2 * Math.PI / teeth;
+
+        arc([w/2, h/2], r, i * angle, (i + 0.4) * angle, i != 0);
+        arc([w/2, h/2], r - r/4, (i + 0.5) * angle, (i + 0.9) * angle, true);
+    }
+    draw();*/
+
+</script>
+</body>
+</html>

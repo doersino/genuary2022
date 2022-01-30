@@ -1,0 +1,215 @@
+http://genuary.art/prompts
+
+JAN.1
+Draw 10,000 of something.
+=> that's 100 x 100
+
+JAN.2
+Dithering.
+=> ascii art? fantasy letters?
+=> or just drawingbot
+=> gradient, red to blue, with ever-shorter and ever-longer lines?
+=> like sierpinsky tri with three pens?
+
+JAN.3
+Space.
+=> easy mode: just some dots with the shiny gel pen?
+=> solar system generator?
+
+JAN.4
+The next next Fidenza.
+=> UJI
+=> "I may or may not be biased, but UJI surely is a candidate. Accessible, eclectic (?), ..."
+
+JAN.5
+Destroy a square.
+=> something 3d? https://github.com/fogleman/ln
+=> or squircle, => https://arxiv.org/pdf/1509.06344.pdf, "4.4 The Squircular Continuum of the Square"
+
+JAN.6
+Trade styles with a friend.
+=> kenno?
+
+JAN.7
+Sol LeWitt Wall Drawing.
+=> see links on prompts page, make a reproduction, maybe with large colored areas cause haven't done that before
+=> or just the 50 points thing
+    => with an interesting arrangement of the points
+    => 1225 lines, https://math.stackexchange.com/questions/185633/formula-for-number-of-lines-you-can-draw-through-n-points
+    => maybe write the prompt, in different pen, https://illmindofryza1.wordpress.com/2016/08/17/sol-lewitt-wall-painting-118/
+=> https://www.artsy.net/artwork/sol-lewitt-wall-drawing-number-462 with perspective and all?
+
+JAN.8
+Single curve only.
+=> snake game?
+=> reproduction of that picasso (?) sketch?
+=> (green) dragon curve? maybe on long paper, with same registration hack as 80x800
+    => Twindragon with different pens? https://en.wikipedia.org/wiki/Dragon_curve
+=> or just some drawingbot thing
+
+JAN.9
+Architecture.
+=> something 3d? https://github.com/fogleman/ln but failed setting it up
+=> floor plan generator?
+=> uji drawing that looks like a causeway? uji_2021-06-19T14.58.31.540Z_s3r170ro-0.3rota0.55e0.996ex1.007t0.5se4000sk0.5i330w3300h2200c25ca29can44l125li167lin204line0.74b2f80in120re80tr0.2tra-0.2rotat50wa4000wav4000wavi0.1wavin0.1j0.4rotati500fa250sa20saw300exp-29expa2canva0.1sh30fad200hu0.1
+=> bird house town generator: black paper, houses in gel pens, birds in white
+
+JAN.10
+Machine learning, wrong answers only.
+=> characters from grail handwriting detection?
+=> video of me moving my plotter by hand, "eventually it'll learn, right?", "reinforcement learning"?
+
+JAN.11
+No computer.
+=> move pen carriage manually?
+=> draw running akkuschrauber across paper? maybe with edding attached? at an angle? holding only at the back of the akkuschrauber?
+=> pen suspended via a string from tripod?
+=> maybe something with styrofoam?
+=> akkuschrauber, two nuts and a threaded rod, clamp edge of paper between them, press power button, hold pen to spinning paper, draw radial things, change clamping points a few times
+
+JAN.12
+Packing (squares, circles, any shape...).
+=> some bird?
+=> neko atsume style cat faces generator
+=> differently-sized boxes (subdivision!), at a slant?
+=> long-running just-try-placing-with-various-rotations? might need some polygon intersection algo, hmm
+=> soot sprites? on bown paper, with white eyes (check if mixes with black pens i have)
+
+JAN.13
+80x800.
+=> long 800mm plot with overlapping sub-bits?
+=> uji drawing?
+=> circle morphing into a square?
+=> https://arxiv.org/pdf/1509.06344.pdf, "4 Fernandez-Guasti’s Squircle"
+=> "square squircling its way into a circle"
+
+|_________|______..._____|_________|_________|______ alignment tabs & cutting line (so that the final drawing has a slight blank border)
+ --------------------------------------------------
+ |               ...                              |
+ |               ...     ...drawing...            |  border (precisely 80x800)
+ |               ...                              |
+ --------------------------------------------------
+----------------------------------------------------
+
+JAN.14
+Something you’d never make.
+=> pink gel pen text "an nft"
+
+JAN.15
+Sand.
+=> drizzle sand on top of wet plotted paint?
+=> or pour some sand onto drawing surface and plot some lines in it, "an ephemeral piece"
+=> try to generate (or get from an image via drawingbot) the lines that form in sand in the desert or on the beach
+=> https://www.google.com/search?q=sand+texture&tbm=isch&ved=2ahUKEwiElofggqj1AhXR6eAKHYiUAtkQ2-cCegQIABAA&oq=sand+texture&gs_lcp=CgNpbWcQAzIFCAAQgAQyBQgAEIAEMgUIABCABDIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBRAeOgYIABAIEB5QAFisDWD9DmgBcAB4AIABXogB7QSSAQE4mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=zJbcYYSAHtHTgweIqYrIDQ&bih=1335&biw=1732&hl=en#imgrc=A_htPNHZNceL2M
+=> or an uji drawing representing sand?
+=> crumble up some cookies to make "sand"?
+=> sandpaper!
+
+JAN.16
+Color gradients gone wrong.
+=> something mixing to yield brown?
+=> somehow in a shape suggesting a butthole? (see community, "e pluribus anus" flag)
+=> different blacks with different reflection characteristics on black paper
+
+JAN.17
+3 colors.
+=> some uji, see folder already, maybe with gel pens, maybe not
+
+JAN.18
+VHS.
+=> line drawing of vhs tape, with band a random spline (implement splines!)
+=> https://www.google.com/search?q=vhs+tape+line+drawing&tbm=isch&ved=2ahUKEwiRytf9pJv1AhWhPOwKHZUqBOMQ2-cCegQIABAA&oq=vhs+tape+line+drawing&gs_lcp=CgNpbWcQAzIFCAAQgAQ6BAgAEEM6BggAEAUQHjoGCAAQCBAeOgQIABAYUP0DWMkVYPoVaABwAHgAgAHnAYgB4w2SAQUzLjguMpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=3OnVYZHsMqH5sAeV1ZCYDg&bih=1335&biw=1732&hl=en#imgrc=2hx_1TFcqEU90M
+
+JAN.19
+Use text/typography.
+=> pragmatapro? tag author and/or teggy. but i don't own a license, hmm.
+=> ascii art?
+=> AAAAAAAAAAAAAAAAAAA
+=> maybe use stabilo brush pen, at an angle
+=> https://github.com/isdat-type/Relief-SingleLine
+=> make a quine?
+
+JAN.20
+Make a sea of shapes.
+=> fish tiling, somehow; with wave effect overlaid?
+=> something like this? https://fineartamerica.com/featured/fish-1-cristina-olariu.html
+=> filled with sine/wavy pattern?
+=> adjacent fish should have different colors, of course
+
+JAN.21
+Combine two (or more) of your pieces from previous days to make a new piece.
+=> just sea of shapes + typography?
+=> or sea of vhs?
+
+JAN.22
+Make something that will look completely different in a year.
+=> plot on top of large cut-off pilea leaf, photograph once per day? or leave leaf on plant and document occasionally?
+=> scratch some chocolate
+
+JAN.23
+Abstract vegetation.
+=> l-systems?
+=> maybe plotted on plastic
+=> https://observablehq.com/@kelleyvanevert/l-systems-2
+    => downloadable
+    => make sure to mention in tweet: @kelleyvanevert's excellent implementation on observable
+    => plot in green, then slightly modify, then in another green (mix in other colors, too -- brown? pink? try to make blossoms!)
+
+JAN.24
+Create your own pseudo-random number generator and visually check the results.
+=> use sine, https://thebookofshaders.com/10/
+
+JAN.25
+Perspective.
+=> something in black on black?
+=> uji: circle iteratively translating downwards with waviness, looking like draping cloth, "despite being just a bunch of wavy circly shapes arranged in a certain way"
+=> or something plotted on plastic that casts an interesting shadow?
+=> or just something 3d
+=> gif, 10 frames or so, tixyz thing like 100r logo ("fuzzy tetrahedron")
+    => reimplement on top of my framework or adjust tixyz
+
+JAN.26
+Airport carpet.
+=> instead of carpet, implement tree shapes used for roof support at stuttgart airport?
+    => https://www.google.com/search?q=stuttgart+airport+tree&tbm=isch&ved=2ahUKEwityPyM2MP1AhVC0-AKHaTHB8UQ2-cCegQIABAA&oq=stuttgart+airport+tree&gs_lcp=CgNpbWcQAzIFCAAQgAQ6BAgAEEM6BggAEAcQHjoGCAAQCBAeOgQIABAYUOwGWOgmYMsqaABwAHgAgAFLiAGXCJIBAjE2mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LBjrYa2CJ8Kmgwekj5-oDA&bih=1335&biw=1732&hl=en#imgrc=Sl5NwCIOH4o7GM
+    => https://www.rikysongsu.com/blog/2017/4/26/stuttgart-airport
+=> plane patterns?
+=> draw on actual carpet? or fabric?
+=> airports of the world, https://www.partow.net/miscellaneous/airportdatabase/index.html#Downloads
+=> random arcs, repeating?
+=> eh
+
+JAN.27
+#2E294E #541388 #F1E9DA #FFD400 #D90368.
+=> find similar pens: dark bluish purple, purple, pink, yellow
+=> warm-white paper (mokuhankan print backing sheet)
+    => make a bunch of small drawings? replicate woodblock prints via vectorization?
+=> uji?
+
+JAN.28
+Self portrait.
+=> drawingbotv3 of some pic
+    => make it look scary, black cloud
+=> or axidraw schematic
+=> baby picture?
+
+JAN.29
+Isometric perspective.
+=> minecraft copper ore block with copper pen and greenish (gel) pen and various gray pens?
+=> or, simpler, something like this: https://twitter.com/ruuddotorg/status/1480233128648011780
+
+JAN.30
+Organic looking output using only rectangular shapes.
+=> or draw something basic and fill with moss from patio outside
+=> some quadtree-based thing?
+=> or more l-systems/dragon-curve stuff in higher level of detail
+
+JAN.31
+Negative space.
+=> a dot or something on really fancy textured paper
+    => cover paper with black or silver edding, but leave the dot?
+    => SILVER OR EDDING ON PLASTIC
+=> space owned by billionaires
+=> </genuary> in small font, or some thank you message, or that's all folks
+
+==> on this day, also take picture of everything; put code and stuff on github, https://github.com/doersino/genuary2022

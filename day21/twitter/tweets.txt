@@ -1,0 +1,17 @@
+#GENUARY2022 №21 – "Combine two (or more) of your pieces from previous days to make a new piece."
+
+I suppose this most closely resembles "typography + sea of shapes"? Rotating grids of symbols based on x and y position.
+
+#plottertwitter #generativeart #creativecoding #genuary
+
+
+The font used here is https://github.com/isdat-type/Relief-SingleLine by @isdat_type.
+
+#plottertwitter #generativeart #creativecoding #genuary #genuary2022
+
+https://twitter.com/isdat_type/status/1479026451001319425
+
+
+Bonus version of today's #genuary2022 drawing. (This paper's a bit of a pen grinder, but it looks amazing when illuminated from the side.)
+
+#plottertwitter #generativeart #creativecoding #genuary

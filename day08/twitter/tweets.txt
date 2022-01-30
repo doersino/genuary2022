@@ -1,0 +1,15 @@
+#GENUARY2022 №08 – "Single curve only."
+
+Wrote a program that draws a Heighway dragon curve (see https://en.wikipedia.org/wiki/Dragon_curve), then fiddled with the maths, finally generated a bunch of dragon-curve-esque things.
+
+#plottertwitter #generativeart #creativecoding #genuary
+
+
+Look at it go!
+
+#plottertwitter #generativeart #creativecoding #genuary #genuary2022
+
+
+I’ve also plotted a more detailed dragon curve, with black pen on black paper, which looks super cool when viewed at the correct angle (and like absolutely nothing otherwise).
+
+#plottertwitter #generativeart #creativecoding #genuary #genuary2022
