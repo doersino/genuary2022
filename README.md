@@ -1,6 +1,6 @@
 # #GENUARY2022
 
-This repository contains the code and/or SVG files underlying the plotter drawings I made for [#GENUARY2022](https://twitter.com/hashtag/GENUARY2022). It also contains the tweeted texts, images, and videos; `notes.txt` contains my ideas and notes.
+This repository contains the code and/or SVG files underlying the plotter drawings I made for [#GENUARY2022](https://twitter.com/hashtag/GENUARY2022). It also contains the tweeted texts, images, and videos *(hence the ~1.2 GB repository size)*; `notes.txt` contains my ideas and notes.
 
 [Click here to view the Twitter thread.](https://twitter.com/doersino/status/1477304986077962249)
 
